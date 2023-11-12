@@ -1,0 +1,19 @@
+#div-botones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#boton {
+     background: yellow;
+}
+
+#imagen{
+    width: 12em;
+}
+
+#imagen-sonicchu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
