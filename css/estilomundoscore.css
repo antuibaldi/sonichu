@@ -1,8 +1,10 @@
 .fila {
     background-color: green;
+    height: 25px;
     width: 25px;
 }
 
 #boton {
     background-color: green;
 }
+

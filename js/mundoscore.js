@@ -22,7 +22,7 @@ function agregarColumnas() {
     let columnasGeneradasHtml = "";
     for (let columna = 0; columna < MAX_COLUMNAS; columna++) {
         columnasGeneradasHtml += `
-                <div id="negra" onclick="detectar(this)" class="fila">
+                <div id="negra" onclick="detectar(this)" class="col fila">
                 </div>
             `;
 
