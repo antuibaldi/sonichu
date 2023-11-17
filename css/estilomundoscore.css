@@ -1,10 +1,14 @@
 .fila {
     background-color: green;
-    height: 25px;
-    width: 25px;
+    height: 64px;
+    width: 64px;
 }
 
 #boton {
     background-color: green;
 }
 
+#sprit {
+    height: 64px;
+    width: 64px;
+}
