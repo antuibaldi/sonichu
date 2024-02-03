@@ -5,8 +5,8 @@ const MAX_COLUMNAS = 20;
 const POS_INICIAL_COL = 3;
 const POS_INICIAL_FIL = 3;
 
-const POS_INICIAL_MAQUINA_COL = 20;
-const POS_INICIAL_MAQUINA_FILA = 20;
+const POS_INICIAL_MAQUINA_COL = 10;  // Adjusted initial position
+const POS_INICIAL_MAQUINA_FILA = 10; // Adjusted initial position
 
 const ARRIBA = "w";
 const ABAJO = "s";
@@ -35,7 +35,7 @@ function agregarColumnas(fila) {
     let columnasGeneradasHtml = "";
     for (let columna = 0; columna < MAX_COLUMNAS; columna++) {
         columnasGeneradasHtml += `
-            <div id="casilla-${fila}-${columna}" onclick="detectar(this)" class="col fila">
+            <div id="casilla-${fila}-${columna}" class="col fila">
             </div>
         `;
         cantCasillas++;
@@ -44,9 +44,10 @@ function agregarColumnas(fila) {
 }
 
 function moverMaquina() {
-    // Mover la máquina en un patrón circular
-    posMaquina[0] = (posMaquina[0] + 1) % MAX_FILA;
-    posMaquina[1] = (posMaquina[1] + 1) % MAX_COLUMNAS;
+    // Implement the logic for moving the machine
+    // For example, move the machine randomly within the grid
+    posMaquina[0] = Math.floor(Math.random() * MAX_FILA);
+    posMaquina[1] = Math.floor(Math.random() * MAX_COLUMNAS);
 }
 
 function modificarPosJugador(event) {
@@ -98,9 +99,10 @@ document.addEventListener("keydown", modificarPosJugador);
 
 // Movimiento de la máquina en un bucle
 setInterval(() => {
+    eliminarMaquina();
     moverMaquina();
     eliminarMaquina();
     agregarMaquina(posMaquina[0], posMaquina[1]);
-}, 1000); // Puedes ajustar la velocidad del movimiento según tus necesidades
+}, 500); // Puedes ajustar la velocidad del movimiento según tus necesidades
 
 generarMatriz();
