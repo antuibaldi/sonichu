@@ -5,8 +5,8 @@ const MAX_COLUMNAS = 20;
 const POS_INICIAL_COL = 3;
 const POS_INICIAL_FIL = 3;
 
-const POS_INICIAL_MAQUINA_COL = 10;  // Adjusted initial position
-const POS_INICIAL_MAQUINA_FILA = 10; // Adjusted initial position
+const POS_INICIAL_MAQUINA_COL = 10;
+const POS_INICIAL_MAQUINA_FILA = 10;
 
 const ARRIBA = "w";
 const ABAJO = "s";
@@ -43,11 +43,16 @@ function agregarColumnas(fila) {
     return columnasGeneradasHtml;
 }
 
+function checkCollision() {
+    if (posJugador[0] === posMaquina[0] && posJugador[1] === posMaquina[1]) {
+        alert("¡Colisión! La máquina ha atrapado al jugador.");
+    }
+}
+
 function moverMaquina() {
-    // Implement the logic for moving the machine
-    // For example, move the machine randomly within the grid
     posMaquina[0] = Math.floor(Math.random() * MAX_FILA);
     posMaquina[1] = Math.floor(Math.random() * MAX_COLUMNAS);
+    checkCollision();
 }
 
 function modificarPosJugador(event) {
@@ -55,20 +60,21 @@ function modificarPosJugador(event) {
 
     switch (event.key) {
         case ARRIBA:
-            posJugador[0]--;
+            if (posJugador[0] > 0) posJugador[0]--;
             break;
         case ABAJO:
-            posJugador[0]++;
+            if (posJugador[0] < MAX_FILA - 1) posJugador[0]++;
             break;
         case IZQUIERDA:
-            posJugador[1]--;
+            if (posJugador[1] > 0) posJugador[1]--;
             break;
         case DERECHA:
-            posJugador[1]++;
+            if (posJugador[1] < MAX_COLUMNAS - 1) posJugador[1]++;
             break;
     }
 
     agregarJugador(posJugador[0], posJugador[1]);
+    checkCollision();
 }
 
 function agregarJugador(fila, col) {
@@ -97,12 +103,10 @@ function eliminarMaquina() {
 
 document.addEventListener("keydown", modificarPosJugador);
 
-// Movimiento de la máquina en un bucle
 setInterval(() => {
     eliminarMaquina();
     moverMaquina();
-    eliminarMaquina();
     agregarMaquina(posMaquina[0], posMaquina[1]);
-}, 500); // Puedes ajustar la velocidad del movimiento según tus necesidades
+}, 100);
 
 generarMatriz();
