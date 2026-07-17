@@ -1,1 +1,1 @@
-Este es un intento de juego de Sonichu, un divertido atrapame si puede
+Hola amigos, este proyecto surgui a inicios del 2023 lo fui continuando de apoco, la verdad ya no me interesa si alguien puede hacer algo mejor con el se lo agradesco tiene un error muy notorio que es que se rompe cuando la maquina toca la moneda capas lo corrija o no en un futuro. Besos y saludos para el proximo milenio
