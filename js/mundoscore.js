@@ -8,6 +8,9 @@ const POS_INICIAL_FIL = 3;
 const POS_INICIAL_MAQUINA_COL = 10;
 const POS_INICIAL_MAQUINA_FILA = 10;
 
+const POS_INICIAL_MONEDA_COL = 7;
+const POS_INICIAL_MONEDA_FILA = 7;
+
 const ARRIBA = "w";
 const ABAJO = "s";
 const IZQUIERDA = "a";
@@ -15,6 +18,7 @@ const DERECHA = "d";
 
 let posJugador = [POS_INICIAL_FIL, POS_INICIAL_COL];
 let posMaquina = [POS_INICIAL_MAQUINA_FILA, POS_INICIAL_MAQUINA_COL];
+let posMoneda = [POS_INICIAL_MONEDA_FILA, POS_INICIAL_MONEDA_COL];
 let cantCasillas = 0;
 
 function generarMatriz() {
@@ -29,6 +33,7 @@ function generarMatriz() {
     }
     agregarJugador(POS_INICIAL_FIL, POS_INICIAL_COL);
     agregarMaquina(POS_INICIAL_MAQUINA_FILA, POS_INICIAL_MAQUINA_COL);
+    agregarMoneda(posMoneda[0], posMoneda[1]);
 }
 
 function agregarColumnas(fila) {
@@ -75,6 +80,7 @@ function modificarPosJugador(event) {
 
     agregarJugador(posJugador[0], posJugador[1]);
     checkCollision();
+    checkMoneda();
 }
 
 function agregarJugador(fila, col) {
@@ -101,6 +107,53 @@ function eliminarMaquina() {
     maquina.classList.remove("maquina");
 }
 
+function agregarMoneda(fila, col) {
+    let moneda = document.querySelector(`#casilla-${fila}-${col}`);
+    moneda.innerHTML = `<img src="../img/moneda.png" alt="moneda" id="moneda">`;
+    moneda.classList.add("moneda");
+}
+
+function eliminarMoneda() {
+    let casilla = document.querySelector(
+        `#casilla-${posMoneda[0]}-${posMoneda[1]}`
+    );
+
+    if (posJugador[0] === posMoneda[0] &&
+        posJugador[1] === posMoneda[1]) {
+
+        casilla.innerHTML = `<img src="../img/sprit.gif" alt="jugador" id="sprit">`;
+    } else {
+        casilla.innerHTML = "";
+    }
+
+    casilla.classList.remove("moneda");
+}
+
+function moverMoneda() {
+
+    eliminarMoneda();
+
+    do {
+        posMoneda[0] = Math.floor(Math.random() * MAX_FILA);
+        posMoneda[1] = Math.floor(Math.random() * MAX_COLUMNAS);
+
+    } while (
+        (posMoneda[0] === posJugador[0] && posMoneda[1] === posJugador[1]) ||
+        (posMoneda[0] === posMaquina[0] && posMoneda[1] === posMaquina[1])
+    );
+
+    agregarMoneda(posMoneda[0], posMoneda[1]);
+}
+function checkMoneda() {
+
+    if (
+        posJugador[0] === posMoneda[0] &&
+        posJugador[1] === posMoneda[1]
+    ) {
+        moverMoneda();
+    }
+
+}
 document.addEventListener("keydown", modificarPosJugador);
 
 setInterval(() => {
